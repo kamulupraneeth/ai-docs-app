@@ -79,7 +79,7 @@ export default function Editor() {
       }
 
       setLoading(false);
-    } catch (err) {
+    } catch {
       setError("Network error: failed to fetch. Please check your connection");
       setLoading(false);
     }
