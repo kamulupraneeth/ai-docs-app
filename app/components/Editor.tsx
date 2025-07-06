@@ -72,32 +72,35 @@ export default function Editor() {
   };
 
   return (
-    <div className="border p-4 rounded-lg shadow-sm bg-white">
-      <input
-        type="text"
-        placeholder="Enter title"
-        className="w-full border mb-4 p-3 rounded"
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <EditorContent editor={editor} className="border rounded p-0" />
-      <button
-        onClick={handleSummarize}
-        className="bg-blue-600 text-white rounded hover:bg-blue-700 py-2 px-4 mt-4"
-      >
-        {loading ? "Summarizing" : "Summarize with AI"}
-      </button>
-
-      {summary && (
-        <div className="mt-4 p-3 border rounded bg-gray-50">
-          <h2 className="font-semibold mb-1">AI Summary:</h2>
-          <p
-            className="whitespace-pre-line"
-            dangerouslySetInnerHTML={{ __html: summary }}
-          ></p>
-          {/* <p>{summary}</p> */}
-        </div>
-      )}
-    </div>
+    <>
+      <div className="border p-4 rounded-lg shadow-sm bg-white">
+        <input
+          type="text"
+          placeholder="Enter title"
+          className="w-full border-2 border-black mb-4 p-3 rounded placeholder-gray-500 caret-black text-black"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+        <EditorContent
+          editor={editor}
+          className="border-2 border-black rounded p-0 caret-black text-black"
+        />
+        <button
+          onClick={handleSummarize}
+          className="bg-blue-600 text-white rounded hover:bg-blue-700 py-2 px-4 mt-4"
+        >
+          {loading ? "Summarizing" : "Summarize with AI"}
+        </button>
+        {summary && (
+          <div className="mt-4 p-3 border rounded bg-gray-50">
+            <h2 className="font-semibold mb-1 text-black">AI Summary:</h2>
+            <p
+              className="whitespace-pre-line text-black"
+              dangerouslySetInnerHTML={{ __html: summary }}
+            ></p>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
