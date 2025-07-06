@@ -7,7 +7,7 @@ export async function POST(req: Request) {
     const { title, content, summary } = await req.json();
     const doc = await Document.create({ title, content, summary });
     return new Response(JSON.stringify(doc), { status: 201 });
-  } catch (_) {
+  } catch {
     return new Response(JSON.stringify({ error: "Failed to save document" }), {
       status: 500,
     });
@@ -19,7 +19,7 @@ export async function GET() {
     await connectDB();
     const docs = await Document.find().sort({ createdAt: -1 });
     return new Response(JSON.stringify(docs), { status: 200 });
-  } catch (err) {
+  } catch {
     return new Response(
       JSON.stringify({ error: "Failed to fetch documents" }),
       { status: 500 }
