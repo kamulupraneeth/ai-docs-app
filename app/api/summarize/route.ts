@@ -37,18 +37,20 @@ ${content}`;
     });
 
     const responseText = chatCompletion.choices[0].message.content;
-    // const fakeResponse = "This is a sample summary from AI.";
 
     return new Response(JSON.stringify({ result: responseText }), {
       status: 200,
     });
-  } catch (err: any) {
-    console.error("Error from OpenAI:", err);
-    return new Response(
-      JSON.stringify({ error: err.message || "Something went wrong" }),
-      {
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      console.error("Error from OpenAI:", err.message);
+      return new Response(JSON.stringify({ error: err.message }), {
         status: 500,
-      }
-    );
+      });
+    }
+
+    return new Response(JSON.stringify({ error: "Something went wrong" }), {
+      status: 500,
+    });
   }
 }

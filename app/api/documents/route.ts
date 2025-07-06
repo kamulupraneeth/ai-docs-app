@@ -7,8 +7,7 @@ export async function POST(req: Request) {
     const { title, content, summary } = await req.json();
     const doc = await Document.create({ title, content, summary });
     return new Response(JSON.stringify(doc), { status: 201 });
-  } catch (err) {
-    console.error("Error saving document:", err);
+  } catch (_) {
     return new Response(JSON.stringify({ error: "Failed to save document" }), {
       status: 500,
     });
